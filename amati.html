@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amati — KAWAN IKLIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kawan-style.css">
+<style>
+  .map-embed{
+    background:#fff;
+    border-radius:24px;
+    padding:14px;
+    box-shadow:0 8px 0 rgba(23,59,52,0.06);
+    margin-bottom:18px;
+  }
+  .map-embed iframe{
+    width:100%;
+    height:640px;
+    border:none;
+    border-radius:16px;
+    display:block;
+  }
+  .map-embed-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    padding:4px 8px 14px;
+  }
+  .map-embed-head h3{margin:0;font-size:17px;}
+  .map-embed-head .pill{background:#dcf3e0;color:var(--leaf-dark);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><div class="logo-mark">🌤️</div><div class="logo-text">KAWAN<span> IKLIM</span></div></div>
+    <button class="burger" id="burgerBtn">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Beranda</a>
+      <a href="kenali.html">Kenali</a>
+      <a href="amati.html" class="active">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+    <div class="nav-avatar">🙂<span class="tip">Profil & lencana — segera hadir</span></div>
+  </div>
+</nav>
+
+<div class="steps">
+  <div class="step done"><span class="dot">✓</span> Kenali</div>
+  <div class="step-line"></div>
+  <div class="step current"><span class="dot">2</span> Amati</div>
+  <div class="step-line"></div>
+  <div class="step"><span class="dot">3</span> Aksi Nyata</div>
+</div>
+
+<section class="mod-hero hero-amati">
+  <span class="pill" style="color:var(--leaf-dark);">Pos 2 dari 3</span>
+  <div class="mod-icon-big">👀</div>
+  <h1>Amati: Lihat Dampaknya di Sekitar Kita</h1>
+  <p>Perubahan iklim bukan cerita dari jauh. Yuk amati bagaimana dampaknya terasa di berbagai daerah di Indonesia, dari Sumatra sampai Papua.</p>
+</section>
+
+<section class="section">
+  <div class="map-embed">
+    <div class="map-embed-head">
+      <h3>🗺️ Peta Dampak Iklim Interaktif</h3>
+      <span class="pill">✓ Sudah bisa dicoba</span>
+    </div>
+    <iframe src="peta_dampak_iklim_indonesia.html" title="Peta Dampak Iklim Indonesia"></iframe>
+  </div>
+
+  <div class="card-grid">
+    <div class="feature-card">
+      <div class="f-icon" style="background:var(--leaf);">📓</div>
+      <h3>Jurnal Observasi</h3>
+      <p>Catat cuaca dan kejadian di sekitarmu setiap hari, lalu lihat polanya bersama teman sekelas.</p>
+      <div class="status-row"><span class="pill status-soon">Segera hadir</span></div>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon" style="background:var(--leaf);">🎙️</div>
+      <h3>Cerita dari Daerah</h3>
+      <p>Dengarkan cerita petani dan nelayan tentang bagaimana iklim memengaruhi kehidupan mereka.</p>
+      <div class="status-row"><span class="pill status-soon">Segera hadir</span></div>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon" style="background:var(--leaf);">📸</div>
+      <h3>Galeri Foto Perubahan</h3>
+      <p>Bandingkan foto satu tempat dari waktu ke waktu untuk melihat perubahan lingkungannya.</p>
+      <div class="status-row"><span class="pill status-soon">Segera hadir</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="page-nav">
+  <a href="kenali.html">← Kembali ke Kenali</a>
+  <a href="aksi.html">Lanjut ke Wujudkan Aksi Nyata →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="logo-mark">🌤️</div><span>KAWAN IKLIM</span></div>
+    <div class="footer-links">
+      <a href="kenali.html">Kenali</a>
+      <a href="amati.html">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+  </div>
+  <p class="footer-note">Dikembangkan dalam program Riset dan Inovasi untuk Indonesia Maju (RIIM) Kompetisi, Fokus Riset Sosial Humaniora — IKIP Siliwangi, Cimahi, 2025.</p>
+</footer>
+
+<script>
+  document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+</script>
+</body>
+</html>

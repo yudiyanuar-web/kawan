@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAWAN IKLIM — Kenali, Amati, Wujudkan Aksi Nyata untuk Iklim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kawan-style.css">
+<style>
+  .hero{position:relative;background:linear-gradient(180deg,var(--sky-top) 0%, var(--sky-bottom) 100%);overflow:hidden;padding:64px 24px 40px;}
+  .hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:20px;position:relative;z-index:2;}
+  @media (max-width:860px){.hero-inner{grid-template-columns:1fr;text-align:center;}}
+  .hero-text .pill{background:#fff;color:var(--ocean);margin-bottom:16px;}
+  .hero-text h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:0 0 16px;color:var(--ink);}
+  .hero-text p{font-size:16.5px;font-weight:700;color:var(--ink-soft);max-width:460px;line-height:1.6;margin:0 0 26px;}
+  @media (max-width:860px){.hero-text p{margin-left:auto;margin-right:auto;}}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+  @media (max-width:860px){.cta-row{justify-content:center;}}
+  .hero-art{position:relative;display:flex;justify-content:center;}
+  .cloud{position:absolute;opacity:.9;animation:drift linear infinite;}
+  @keyframes drift{from{transform:translateX(-20px);}to{transform:translateX(20px);}}
+  .mascot{width:240px;animation:bob 3.2s ease-in-out infinite;}
+  .bubble-stat{position:absolute;background:#fff;border-radius:16px;padding:8px 12px;font-weight:800;font-size:12.5px;color:var(--ink);box-shadow:0 4px 0 rgba(23,59,52,0.1);}
+
+  .path-wrap{position:relative;padding:20px 0 10px;}
+  .path-svg{width:100%;height:auto;display:block;}
+  .path-nodes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:-24px;}
+  @media (max-width:760px){.path-nodes{grid-template-columns:1fr;}.path-svg{display:none;}}
+  .node{background:var(--card);border-radius:22px;padding:22px 20px;text-align:center;box-shadow:0 8px 0 rgba(23,59,52,0.06);transition:transform .15s;}
+  .node:hover{transform:translateY(-4px);}
+  .node .node-icon{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:30px;border:4px solid #fff;box-shadow:0 4px 0 rgba(23,59,52,0.15);}
+  .node h3{font-size:18px;margin:0 0 8px;}
+  .node p{font-size:13.5px;color:var(--ink-soft);font-weight:600;line-height:1.55;margin:0 0 16px;}
+  .node a.btn{font-size:14px;padding:9px 20px;}
+
+  .why{display:grid;grid-template-columns:0.8fr 1.2fr;gap:36px;align-items:center;}
+  @media (max-width:800px){.why{grid-template-columns:1fr;text-align:center;}}
+  .why-globe{font-size:110px;text-align:center;animation:spin-slow 14s linear infinite;}
+  @keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  .why-text h2{font-size:clamp(22px,3vw,30px);margin:0 0 14px;}
+  .why-text p{font-size:15px;font-weight:600;color:var(--ink-soft);line-height:1.7;margin:0;}
+
+  .quote-card{max-width:640px;margin:0 auto;background:#fff;border-radius:22px;padding:28px 30px;text-align:center;box-shadow:0 8px 0 rgba(23,59,52,0.06);}
+  .quote-card .quote-mark{font-size:34px;color:var(--sun-dark);font-family:'Baloo 2',sans-serif;}
+  .quote-card p.quote-text{font-size:17px;font-weight:700;color:var(--ink);margin:6px 0 12px;line-height:1.5;}
+  .quote-card .quote-by{font-size:13.5px;color:var(--ink-soft);font-weight:700;}
+  .quote-note{text-align:center;font-size:12px;color:#9db3af;margin-top:10px;font-weight:700;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><div class="logo-mark">🌤️</div><div class="logo-text">KAWAN<span> IKLIM</span></div></div>
+    <button class="burger" id="burgerBtn">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Beranda</a>
+      <a href="kenali.html">Kenali</a>
+      <a href="amati.html">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="#tentang">Tentang</a>
+    </div>
+    <div class="nav-avatar">🙂<span class="tip">Profil & lencana — segera hadir</span></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="pill">Untuk siswa kelas 4, 5, dan 6 SD</span>
+      <h1>Yuk, kenalan sama iklim bumi kita!</h1>
+      <p>KAWAN IKLIM mengajak kamu mengenali, mengamati, dan ikut menjaga bumi dari perubahan iklim — sambil main dan seru-seruan.</p>
+      <div class="cta-row">
+        <a href="kenali.html" class="btn btn-primary">🚀 Mulai Petualangan</a>
+        <a href="#tentang" class="btn btn-ghost">Kenapa ini penting?</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="cloud" style="left:0;top:10px;animation-duration:9s;" width="90" height="50" viewBox="0 0 90 50"><ellipse cx="30" cy="30" rx="30" ry="18" fill="#fff"/><ellipse cx="55" cy="22" rx="22" ry="16" fill="#fff"/></svg>
+      <svg class="cloud" style="right:0;top:60px;animation-duration:7s;animation-direction:alternate-reverse;" width="70" height="40" viewBox="0 0 70 40"><ellipse cx="25" cy="24" rx="25" ry="14" fill="#fff"/><ellipse cx="46" cy="18" rx="18" ry="13" fill="#fff"/></svg>
+      <svg class="mascot" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="110" cy="150" rx="80" ry="55" fill="#ffffff"/>
+        <ellipse cx="60" cy="120" rx="42" ry="38" fill="#ffffff"/>
+        <ellipse cx="160" cy="120" rx="42" ry="38" fill="#ffffff"/>
+        <ellipse cx="110" cy="100" rx="55" ry="48" fill="#ffffff"/>
+        <path d="M110 55 Q95 25 125 15 Q120 40 140 45 Q120 55 110 55 Z" fill="var(--leaf)"/>
+        <circle cx="88" cy="140" r="8" fill="var(--ink)"/>
+        <circle cx="132" cy="140" r="8" fill="var(--ink)"/>
+        <circle cx="80" cy="155" r="9" fill="#ffd7cc" opacity="0.8"/>
+        <circle cx="140" cy="155" r="9" fill="#ffd7cc" opacity="0.8"/>
+        <path d="M92 165 Q110 182 128 165" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="bubble-stat" style="left:0;bottom:10px;">🔍 Kenali</div>
+      <div class="bubble-stat" style="right:10px;bottom:60px;">🌱 Beraksi</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="peta-petualangan">
+  <div class="section-head">
+    <h2>Peta Petualangan Iklim</h2>
+    <p>Ada tiga pos yang bisa kamu jelajahi. Mulai dari yang paling kiri, ya!</p>
+  </div>
+  <div class="path-wrap">
+    <svg class="path-svg" viewBox="0 0 1000 90" preserveAspectRatio="none">
+      <path d="M 130 70 Q 330 10 500 70 T 870 70" stroke="#cfe6da" stroke-width="6" fill="none" stroke-dasharray="2 18" stroke-linecap="round"/>
+    </svg>
+    <div class="path-nodes">
+      <div class="node">
+        <div class="node-icon" style="background:var(--ocean);">🔍</div>
+        <h3>Kenali</h3>
+        <p>Cari tahu apa itu perubahan iklim dan kenapa itu penting buat bumi kita.</p>
+        <a href="kenali.html" class="btn btn-primary">Jelajahi</a>
+      </div>
+      <div class="node">
+        <div class="node-icon" style="background:var(--leaf);">👀</div>
+        <h3>Amati</h3>
+        <p>Amati bagaimana iklim memengaruhi berbagai daerah di Indonesia.</p>
+        <a href="amati.html" class="btn btn-primary">Jelajahi</a>
+      </div>
+      <div class="node">
+        <div class="node-icon" style="background:var(--coral);">🌱</div>
+        <h3>Wujudkan Aksi Nyata</h3>
+        <p>Lakukan aksi kecil yang bisa bikin perubahan besar untuk bumi.</p>
+        <a href="aksi.html" class="btn btn-primary">Jelajahi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tentang">
+  <div class="why">
+    <div class="why-globe">🌍</div>
+    <div class="why-text">
+      <h2>Kenapa ini semua penting?</h2>
+      <p>Bumi kita sedang jadi lebih panas. Es di kutub mencair, cuaca jadi susah ditebak, dan banyak hewan kehilangan rumahnya. Kabar baiknya, kalau kita mulai bertindak dari sekarang — sekecil apa pun itu — kita ikut menjaga bumi untuk generasi berikutnya. Termasuk kamu sendiri, di masa depan nanti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Kata Kawan-Kawan Kita</h2></div>
+  <div class="quote-card">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">Aku jadi tahu kenapa harus hemat listrik di rumah, ternyata itu bantu bumi juga!</p>
+    <div class="quote-by">— Contoh tanggapan siswa kelas 5</div>
+  </div>
+  <p class="quote-note">*Contoh tanggapan. Akan diperbarui dengan hasil uji coba lapangan yang sesungguhnya.</p>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="logo-mark">🌤️</div><span>KAWAN IKLIM</span></div>
+    <div class="footer-links">
+      <a href="kenali.html">Kenali</a>
+      <a href="amati.html">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="#tentang">Tentang</a>
+    </div>
+  </div>
+  <p class="footer-note">Dikembangkan dalam program Riset dan Inovasi untuk Indonesia Maju (RIIM) Kompetisi, Fokus Riset Sosial Humaniora — IKIP Siliwangi, Cimahi, 2025. Rancangan ini adalah kerangka awal yang akan terus dilengkapi seiring proses pengembangan dan uji coba produk.</p>
+</footer>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+</script>
+</body>
+</html>
