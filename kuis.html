@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuis Seru — KAWAN IKLIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kawan-style.css">
+<style>
+  .quiz-wrap{max-width:640px;margin:0 auto;padding:36px 24px 70px;}
+  .progress-track{
+    height:12px;background:#e6efe9;border-radius:999px;overflow:hidden;margin-bottom:10px;
+  }
+  .progress-fill{
+    height:100%;background:linear-gradient(90deg,var(--ocean),var(--leaf));
+    border-radius:999px;
+    width:0%;
+    transition:width .35s ease;
+  }
+  .progress-label{
+    display:flex;justify-content:space-between;
+    font-size:13px;font-weight:800;color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .quiz-card{
+    background:#fff;
+    border-radius:24px;
+    padding:28px 26px;
+    box-shadow:0 8px 0 rgba(23,59,52,0.06);
+  }
+  .quiz-card .q-icon{
+    width:52px;height:52px;border-radius:16px;
+    background:var(--ocean);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;color:#fff;
+    border:3px solid #fff;
+    box-shadow:0 3px 0 rgba(23,59,52,0.15);
+    margin-bottom:14px;
+  }
+  .quiz-card h2{font-size:19px;margin:0 0 20px;line-height:1.5;}
+  .option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    text-align:left;
+    background:var(--bg);
+    border:2px solid #e6efe9;
+    border-radius:16px;
+    padding:14px 16px;
+    font-family:'Nunito',sans-serif;
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--ink);
+    cursor:pointer;
+    margin-bottom:12px;
+    transition:border-color .15s, background .15s, transform .1s;
+  }
+  .option:hover{border-color:var(--ocean);}
+  .option:active{transform:scale(0.99);}
+  .option.correct{background:#dcf3e0;border-color:var(--leaf);}
+  .option.incorrect{background:#ffe4de;border-color:var(--coral);}
+  .option:disabled{cursor:default;}
+  .option .opt-letter{
+    width:26px;height:26px;border-radius:50%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12.5px;font-weight:800;flex-shrink:0;
+    border:2px solid #dce9e4;
+  }
+
+  .feedback{
+    margin-top:6px;
+    padding:14px 16px;
+    border-radius:14px;
+    font-size:13.5px;
+    font-weight:600;
+    line-height:1.55;
+    display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.correct-fb{background:#dcf3e0;color:#1c5c34;}
+  .feedback.incorrect-fb{background:#fff2d6;color:#7a5300;}
+  .feedback b{display:block;font-size:14.5px;margin-bottom:3px;font-family:'Baloo 2',sans-serif;}
+
+  .next-btn{
+    margin-top:18px;
+    width:100%;
+    display:none;
+  }
+  .next-btn.show{display:inline-flex;justify-content:center;}
+
+  .hint-row{
+    display:flex;justify-content:flex-end;margin-bottom:14px;
+  }
+  .hint-btn{
+    background:none;border:none;color:var(--ink-soft);font-weight:800;font-size:12.5px;cursor:pointer;
+    display:flex;align-items:center;gap:5px;
+  }
+  .hint-box{
+    background:#fff7e6;border:2px dashed var(--sun);border-radius:12px;
+    padding:10px 14px;font-size:13px;font-weight:600;margin-bottom:16px;display:none;
+  }
+  .hint-box.show{display:block;}
+
+  /* result screen */
+  .result-card{
+    background:#fff;border-radius:24px;padding:34px 28px;text-align:center;
+    box-shadow:0 8px 0 rgba(23,59,52,0.06);
+  }
+  .result-badge{font-size:62px;margin-bottom:6px;}
+  .result-card h2{font-size:21px;margin:0 0 6px;}
+  .result-score{font-size:15px;font-weight:800;color:var(--ink-soft);margin-bottom:14px;}
+  .result-card p.result-msg{font-size:14.5px;font-weight:600;color:var(--ink-soft);line-height:1.6;margin:0 0 22px;}
+  .result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+  #intro-card{text-align:center;}
+  #intro-card .mod-icon-big{font-size:52px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><div class="logo-mark">🌤️</div><div class="logo-text">KAWAN<span> IKLIM</span></div></div>
+    <button class="burger" id="burgerBtn">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Beranda</a>
+      <a href="kenali.html" class="active">Kenali</a>
+      <a href="amati.html">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+    <div class="nav-avatar">🙂<span class="tip">Profil & lencana — segera hadir</span></div>
+  </div>
+</nav>
+
+<section class="mod-hero hero-kenali" style="padding-bottom:10px;">
+  <span class="pill" style="color:var(--ocean);">Kenali · Kuis Seru</span>
+  <h1 style="font-size:clamp(24px,3.6vw,32px);">Uji Pemahamanmu!</h1>
+  <p style="margin-bottom:6px;">Tujuh pertanyaan seputar perubahan iklim. Jangan khawatir kalau ada yang salah — di situ kamu jadi belajar hal baru.</p>
+</section>
+
+<div class="quiz-wrap">
+
+  <div id="intro-card" class="quiz-card">
+    <div class="mod-icon-big" style="margin:0 auto 12px;">🧠</div>
+    <h2 style="margin-bottom:8px;">Siap mulai kuisnya?</h2>
+    <p style="font-size:14px;font-weight:600;color:var(--ink-soft);margin:0 0 22px;">Ada 7 soal pilihan ganda. Jawab satu-satu, dan kamu akan langsung tahu jawabannya benar atau belum setiap selesai memilih.</p>
+    <button class="btn btn-primary" id="startBtn" style="width:100%;justify-content:center;">🚀 Mulai Kuis</button>
+  </div>
+
+  <div id="quiz-area" style="display:none;">
+    <div class="progress-label"><span id="progressText">Soal 1 dari 7</span><span id="scoreText">Skor: 0</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="quiz-card">
+      <div class="q-icon" id="qIcon">🌍</div>
+      <div class="hint-row"><button class="hint-btn" id="hintBtn">💡 Lihat petunjuk</button></div>
+      <div class="hint-box" id="hintBox"></div>
+      <h2 id="qText"></h2>
+      <div id="optionsWrap"></div>
+      <div class="feedback" id="feedbackBox"></div>
+      <button class="btn btn-primary next-btn" id="nextBtn">Lanjut →</button>
+    </div>
+  </div>
+
+  <div id="result-area" style="display:none;">
+    <div class="result-card">
+      <div class="result-badge" id="resultBadge">🏅</div>
+      <h2 id="resultTitle">Kamu Hebat!</h2>
+      <div class="result-score" id="resultScore">Skor: 0 dari 7</div>
+      <p class="result-msg" id="resultMsg"></p>
+      <div class="result-actions">
+        <button class="btn btn-ghost" id="retryBtn">🔁 Coba Lagi</button>
+        <a href="kenali.html" class="btn btn-primary">Kembali ke Kenali</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="logo-mark">🌤️</div><span>KAWAN IKLIM</span></div>
+    <div class="footer-links">
+      <a href="kenali.html">Kenali</a>
+      <a href="amati.html">Amati</a>
+      <a href="aksi.html">Wujudkan Aksi Nyata</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+  </div>
+  <p class="footer-note">Dikembangkan dalam program Riset dan Inovasi untuk Indonesia Maju (RIIM) Kompetisi, Fokus Riset Sosial Humaniora — IKIP Siliwangi, Cimahi, 2025.</p>
+</footer>
+
+<script>
+document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+const QUESTIONS = [
+  {
+    icon:"🌡️",
+    q:"Apa itu \"efek rumah kaca\" yang sering disebut saat membahas perubahan iklim?",
+    options:[
+      "Gas-gas di udara yang menjebak panas matahari sehingga bumi jadi lebih hangat",
+      "Rumah kaca yang dipakai untuk menanam bunga di taman",
+      "Sinar matahari yang dipantulkan oleh cermin",
+      "Awan yang menutupi seluruh langit"
+    ],
+    correct:0,
+    hint:"Namanya memang \"rumah kaca\", tapi ini bukan tentang bangunan kaca sungguhan.",
+    explain:"Efek rumah kaca terjadi karena gas-gas seperti karbon dioksida menjebak panas matahari di atmosfer bumi, seperti selimut yang membuat bumi jadi hangat."
+  },
+  {
+    icon:"🚗",
+    q:"Manakah yang merupakan CONTOH sumber gas rumah kaca dari kegiatan manusia?",
+    options:[
+      "Embun di pagi hari",
+      "Asap dari kendaraan bermotor",
+      "Air hujan yang jatuh",
+      "Daun kering yang gugur"
+    ],
+    correct:1,
+    hint:"Pikirkan sesuatu yang keluar dari knalpot mobil atau motor.",
+    explain:"Asap kendaraan bermotor mengandung karbon dioksida, salah satu gas rumah kaca utama yang dihasilkan dari membakar bahan bakar."
+  },
+  {
+    icon:"❄️",
+    q:"Apa yang terjadi pada permukaan air laut kalau es di kutub banyak yang mencair?",
+    options:[
+      "Air laut menjadi lebih asin",
+      "Permukaan air laut naik",
+      "Air laut berubah warna",
+      "Tidak terjadi apa-apa"
+    ],
+    correct:1,
+    hint:"Bayangkan es batu yang mencair di gelas — apa yang terjadi pada ketinggian air di gelas itu?",
+    explain:"Sama seperti es batu yang mencair menambah air di gelas, es yang mencair dari kutub menambah jumlah air di lautan sehingga permukaannya naik."
+  },
+  {
+    icon:"🌳",
+    q:"Manakah tindakan berikut yang termasuk MITIGASI atau upaya mengurangi penyebab perubahan iklim?",
+    options:[
+      "Menanam lebih banyak pohon",
+      "Membakar sampah di halaman",
+      "Menyalakan AC terus-menerus",
+      "Membuang sampah ke sungai"
+    ],
+    correct:0,
+    hint:"Pohon punya kemampuan istimewa untuk menyerap gas tertentu dari udara.",
+    explain:"Pohon menyerap karbon dioksida dari udara lewat fotosintesis, sehingga menanam pohon membantu mengurangi salah satu penyebab pemanasan bumi."
+  },
+  {
+    icon:"🌊",
+    q:"Fenomena \"banjir rob\" — air laut yang naik ke daratan saat pasang — paling sering terjadi di wilayah apa?",
+    options:[
+      "Puncak gunung",
+      "Tengah hutan",
+      "Pesisir pantai",
+      "Dataran tinggi"
+    ],
+    correct:2,
+    hint:"Cari kata yang berhubungan dengan \"laut\" pada pertanyaannya.",
+    explain:"Banjir rob terjadi di daerah pesisir karena di sanalah daratan bertemu langsung dengan laut, sehingga air pasang bisa naik ke jalan dan rumah warga."
+  },
+  {
+    icon:"☀️",
+    q:"Kenapa sebagian wilayah Indonesia mengalami kekeringan yang lebih panjang akibat perubahan iklim?",
+    options:[
+      "Karena penduduknya semakin banyak",
+      "Karena musim kemarau menjadi lebih panjang dan hujan berkurang",
+      "Karena sungai-sungai dipindahkan",
+      "Karena matahari semakin dekat dengan bumi"
+    ],
+    correct:1,
+    hint:"Perubahan iklim mengubah pola musim, termasuk berapa lama musim kemarau berlangsung.",
+    explain:"Perubahan iklim bisa membuat pola cuaca berubah, salah satunya musim kemarau yang berlangsung lebih lama dari biasanya dengan curah hujan yang lebih sedikit."
+  },
+  {
+    icon:"💡",
+    q:"Manakah kebiasaan sehari-hari yang membantu mengurangi pemanasan global?",
+    options:[
+      "Membiarkan lampu menyala sepanjang hari",
+      "Menggunakan kendaraan pribadi untuk jarak sangat dekat",
+      "Mematikan lampu dan alat elektronik saat tidak digunakan",
+      "Membiarkan keran air terus mengalir"
+    ],
+    correct:2,
+    hint:"Coba ingat, kebiasaan mana yang justru menghemat energi listrik di rumah?",
+    explain:"Menghemat listrik berarti mengurangi kebutuhan energi dari pembangkit listrik, yang sebagian besar masih menghasilkan gas rumah kaca saat beroperasi."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const introCard = document.getElementById('intro-card');
+const quizArea = document.getElementById('quiz-area');
+const resultArea = document.getElementById('result-area');
+const optionsWrap = document.getElementById('optionsWrap');
+const qText = document.getElementById('qText');
+const qIcon = document.getElementById('qIcon');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const scoreText = document.getElementById('scoreText');
+const feedbackBox = document.getElementById('feedbackBox');
+const nextBtn = document.getElementById('nextBtn');
+const hintBtn = document.getElementById('hintBtn');
+const hintBox = document.getElementById('hintBox');
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  introCard.style.display = 'none';
+  quizArea.style.display = 'block';
+  renderQuestion();
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  current = 0; score = 0; answered = false;
+  resultArea.style.display = 'none';
+  quizArea.style.display = 'block';
+  renderQuestion();
+});
+
+function renderQuestion(){
+  answered = false;
+  const item = QUESTIONS[current];
+  qIcon.textContent = item.icon;
+  qText.textContent = item.q;
+  progressText.textContent = `Soal ${current+1} dari ${QUESTIONS.length}`;
+  scoreText.textContent = `Skor: ${score}`;
+  progressFill.style.width = `${(current/QUESTIONS.length)*100}%`;
+  feedbackBox.className = 'feedback';
+  feedbackBox.innerHTML = '';
+  nextBtn.className = 'btn btn-primary next-btn';
+  hintBox.className = 'hint-box';
+  hintBox.textContent = item.hint;
+
+  const letters = ['A','B','C','D'];
+  optionsWrap.innerHTML = '';
+  item.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.addEventListener('click', () => selectAnswer(i));
+    optionsWrap.appendChild(btn);
+  });
+}
+
+hintBtn.addEventListener('click', () => hintBox.classList.toggle('show'));
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const item = QUESTIONS[current];
+  const buttons = optionsWrap.querySelectorAll('.option');
+  buttons.forEach(b => b.disabled = true);
+
+  if(i === item.correct){
+    score++;
+    buttons[i].classList.add('correct');
+    feedbackBox.className = 'feedback show correct-fb';
+    feedbackBox.innerHTML = `<b>Benar!</b>${item.explain}`;
+  } else {
+    buttons[i].classList.add('incorrect');
+    buttons[item.correct].classList.add('correct');
+    feedbackBox.className = 'feedback show incorrect-fb';
+    feedbackBox.innerHTML = `<b>Belum tepat, tapi tidak apa-apa.</b>${item.explain}`;
+  }
+  scoreText.textContent = `Skor: ${score}`;
+  nextBtn.classList.add('show');
+}
+
+nextBtn.addEventListener('click', () => {
+  current++;
+  if(current >= QUESTIONS.length){
+    showResult();
+  } else {
+    renderQuestion();
+  }
+});
+
+function showResult(){
+  quizArea.style.display = 'none';
+  resultArea.style.display = 'block';
+  progressFill.style.width = '100%';
+
+  document.getElementById('resultScore').textContent = `Skor: ${score} dari ${QUESTIONS.length}`;
+
+  const badgeEl = document.getElementById('resultBadge');
+  const titleEl = document.getElementById('resultTitle');
+  const msgEl = document.getElementById('resultMsg');
+
+  if(score >= 6){
+    badgeEl.textContent = '🥇';
+    titleEl.textContent = 'Keren, Kamu Kawan Peduli Iklim!';
+    msgEl.textContent = 'Pemahamanmu tentang perubahan iklim sudah sangat baik. Yuk lanjut ke pos Amati untuk lihat dampaknya di berbagai daerah Indonesia.';
+  } else if(score >= 4){
+    badgeEl.textContent = '🥈';
+    titleEl.textContent = 'Bagus, Kamu Kawan Belajar Iklim!';
+    msgEl.textContent = 'Kamu sudah paham banyak hal penting. Coba baca lagi materi di pos Kenali, lalu ulangi kuis ini kalau mau, untuk mengejar lencana emas.';
+  } else {
+    badgeEl.textContent = '🌱';
+    titleEl.textContent = 'Awal yang Bagus, Kawan Pemula!';
+    msgEl.textContent = 'Setiap ahli iklim juga mulai dari sini. Coba pelajari lagi materi di pos Kenali, lalu semangat coba kuisnya sekali lagi, ya!';
+  }
+}
+</script>
+</body>
+</html>
